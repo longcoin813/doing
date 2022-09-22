@@ -1,33 +1,14 @@
-version: 0.2
-
-env:
+version:  0.2
 
 phases:
-  install:
-    commands:
-      - echo Entered the install phase...
-      - apt-get update -y
-      - apt-get install -y maven
-    finally:
-      - echo This always runs even if the update or install command fails
-  pre_build:
-    commands:
-      - echo Entered the pre_build phase...
-      - cd server/harvest
-    finally:
-      - echo This always runs even if the login command fails
   build:
     commands:
       - echo Entered the build phase...
-      - echo Build started on `date`
-      - mvn package
-    finally:
-      - echo This always runs even if the install command fails
+      - gradle clean package
   post_build:
     commands:
-      - echo Entered the post_build phase...
-      - echo Build completed on `date`
-artifacts:
+      - echo Build completed successfully
+artiacts:
   files:
-    - target/harvest-1.0-SNAPSHOT.jar
+    - target/gradle-wrapper.jar
   discard-paths: yes
